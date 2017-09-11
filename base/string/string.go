@@ -35,19 +35,24 @@ func init() {
 }
 
 func main() {
-	fmt.Println("--------------------------- String")
+	urldemo()
+	strdemo()
+}
+
+func urldemo() {
+	fmt.Println("--------------------------- url")
 	base := "http%3A%2F%2Fm.sh.189.cn%2Fservice%2FbackPayInfo%3Fid%3D2016061297349034995730725"
 	fmt.Println(base)
 	str1, _ := url.QueryUnescape(base)
 	fmt.Println(str1) //http://m.sh.189.cn/service/backPayInfo?id=2016061297349034995730725
 	str2 := url.QueryEscape(str1)
 	fmt.Println(str2) //http%3A%2F%2Fm.sh.189.cn%2Fservice%2FbackPayInfo%3Fid%3D2016061297349034995730725
-
 }
 
 func strdemo() {
+	fmt.Println("------------------- strings 常用判断")
 	str := "Hello world"
-	fmt.Println(str)
+	fmt.Println("初始值：", str)
 	fmt.Println("字符长度", len(str))
 
 	fmt.Println("转换为小写：", strings.ToLower(str))
@@ -57,4 +62,5 @@ func strdemo() {
 	fmt.Println("比较：", strings.EqualFold(str, "world"))
 	fmt.Println("比较：", strings.EqualFold(str, "Hello world"))
 
+	fmt.Println("判断字符串是否包含“e”:", strings.Contains(str, "e"))
 }

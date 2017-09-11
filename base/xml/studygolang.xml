@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<persons>
+    <person name="polaris" age="28">
+        <career>无业游民</career>
+        <interests>
+            <interest>编程</interest>
+            <interest>下棋</interest>
+        </interests>
+    </person>
+</persons>
