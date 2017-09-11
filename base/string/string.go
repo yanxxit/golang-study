@@ -63,4 +63,10 @@ func strdemo() {
 	fmt.Println("比较：", strings.EqualFold(str, "Hello world"))
 
 	fmt.Println("判断字符串是否包含“e”:", strings.Contains(str, "e"))
+	prize := "https://m.sh.189.cn/telecoupon/getCoupon/page?couponid=4262C910-01F6-C0DF-A594-A1D9C61EB04F"
+
+	fmt.Println(prize)
+	fmt.Println("分割：", strings.Split(prize, "couponid="))
+	fmt.Println("分割：", strings.Split(prize, "couponid=")[1])
+
 }
