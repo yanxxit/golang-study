@@ -9,7 +9,7 @@ import (
 	"flag"
 )
 
-func main() {
+func main1() {
 	connection := flag.Int("c", 200, "-c N")
 	timeout := flag.Int("o", 5, "-o N")
 	timeover := flag.Int("t", 5, "-t N")
