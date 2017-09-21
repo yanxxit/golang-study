@@ -1,9 +1,9 @@
 package main
 
-import "fmt"
 import (
 	"github.com/go-redis/redis"
 	"time"
+	"fmt"
 )
 
 // 创建 redis 客户端
@@ -11,7 +11,7 @@ func createClient() *redis.Client {
 	client := redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
 		Password: "",
-		DB:       0,
+		DB:       1,
 		PoolSize: 10,
 	})
 
@@ -47,15 +47,15 @@ func main() {
 	fmt.Println(client)
 	AddCatch()
 	// 这里设置过期时间.
-	err := client.Set("age", "20", 10000*time.Second).Err()
+	err := client.Set("telecom:age", "20", 10000*time.Second).Err()
 	if err != nil {
 		panic(err)
 	}
 
-	client.Set("JSON", `{"status":200}`, 10000*time.Second).Err()
-	client.Set("apis:getName:data", `{"status":200}`, 10000*time.Second).Err()
+	client.Set("telecom:JSON", `{"status":200}`, 10000*time.Second).Err()
+	client.Set("telecom:apis:getName:data", `{"status":200}`, 10000*time.Second).Err()
 
-	val, err := client.Get("JSON").Result()
+	val, err := client.Get("telecom:JSON").Result()
 	if err != nil {
 		panic(err)
 	}

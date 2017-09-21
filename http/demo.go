@@ -23,6 +23,6 @@ func httpPost() {
 
 	fmt.Println(string(body))
 }
-//func main()  {
-//	httpPost();
-//}
+func main()  {
+	httpPost();
+}
