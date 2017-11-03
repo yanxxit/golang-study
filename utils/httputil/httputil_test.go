@@ -10,9 +10,12 @@ import (
 )
 
 func TestGet(t *testing.T) {
-	body, terr := Get("http://m.sh.189.cn/service/node/crypto?data=oKXUCj1MOddnp-sCpGi1J1dg3TyM,abc&key=wechat-mobile-201604&type=0");
-	fmt.Println(terr)
-	fmt.Println("get 请求结果" + string(body))
+	for i := 0; i < 100; i++ {
+		body, terr := Get("http://127.0.0.1:6211/payment-activity/chongyang/pay/back?payid=2017102414341448267813731&retncode=0000");
+		fmt.Println(terr)
+		fmt.Println("get 请求结果" + string(body))
+	}
+
 }
 
 //
