@@ -11,9 +11,13 @@ import (
 	"os"
 	"fmt"
 	"flag"
+	"bufio"
 )
 
 func main() {
+	bio := bufio.NewReader(os.Stdin)
+	line, hasMoreInLine, err := bio.ReadLine()
+	fmt.Println(line, hasMoreInLine, err)
 	// os.Args方式
 	args := os.Args
 	if args == nil || len(args) < 2 {
