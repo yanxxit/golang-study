@@ -6,13 +6,27 @@ import (
 )
 
 func main() {
-	var nickname = "闫肖肖" //加密
-	nickname = base64.StdEncoding.EncodeToString([]byte(nickname))
-	fmt.Println(nickname)
-	//解密
-	nick_name_baty, err := base64.StdEncoding.DecodeString(nickname)
-	if err == nil {
-		fmt.Println(string(nick_name_baty))
+	input := []byte("hello golang base64 快乐编程http://www.01happy.com +~")
+
+	// 演示base64编码
+	encodeString := base64.StdEncoding.EncodeToString(input)
+	fmt.Println(encodeString)
+
+	// 对上面的编码结果进行base64解码
+	decodeBytes, err := base64.StdEncoding.DecodeString(encodeString)
+	if err != nil {
+		fmt.Println(err)
+
 	}
-	fmt.Println("还可以")
+	fmt.Println(string(decodeBytes))
+
+	// 如果要用在url中，需要使用URLEncoding  针对数字 解析的结果 出现 + 就会解析失败。
+	uEnc := base64.URLEncoding.EncodeToString([]byte(input))
+	fmt.Println(uEnc)
+
+	uDec, err := base64.URLEncoding.DecodeString(uEnc)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(uDec))
 }
