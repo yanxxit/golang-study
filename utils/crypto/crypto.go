@@ -9,11 +9,11 @@ import (
 
 func AesStringEncrypt(value, key string) (string, error) {
 	result, err := AesEncrypt([]byte(value), []byte(key))
-	return base64.StdEncoding.EncodeToString(result), err
+	return base64.URLEncoding.EncodeToString(result), err
 }
 
 func AesStringDecrypt(value, key string) (string, error) {
-	str, err := base64.StdEncoding.DecodeString(value)
+	str, err := base64.URLEncoding.DecodeString(value)
 	result, err := AesDecrypt(str, []byte(key))
 	return string(result), err
 }

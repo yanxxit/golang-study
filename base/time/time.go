@@ -43,4 +43,6 @@ func main() {
 		fmt.Println("超过了,活动结束了")
 	}
 
+	fmt.Println("AAAAAAAAAAAAAA", time.Now().Format("2006-01-02 15:04:05"))
+
 }
