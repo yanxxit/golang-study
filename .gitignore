@@ -32,3 +32,6 @@ vcs.xml
 
 *.xls
 *.xlsx
+*.txt
+*.zip
+*.tar.gz
