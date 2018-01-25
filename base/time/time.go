@@ -22,6 +22,8 @@ func main() {
 	timestamp := cur.UnixNano() / (1000000 * 1000)
 	fmt.Println(timestamp) //获取时间戳
 
+	fmt.Println("时间戳：---", time.Now().Unix())
+
 	timeUnix1 := time.Now().Unix() //已知的时间戳
 	formatTimeStr1 := time.Unix(timeUnix1, 0).Format("2006-01-02 15:04:05")
 	fmt.Println(formatTimeStr1) //打印结果：2017-04-11 13:30:39

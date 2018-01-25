@@ -1,12 +1,12 @@
 package main
 
 import (
-	"os"
 	"encoding/csv"
+	"os"
 )
 
 func main() {
-	f, err := os.Create("db/excel/demo.xls")
+	f, err := os.Create("./demo.xls")
 	if err != nil {
 		panic(err)
 	}

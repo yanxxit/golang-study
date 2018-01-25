@@ -29,3 +29,6 @@ GOPATH__beego_common_utils_.xml
 
 misc.xml
 vcs.xml
+
+*.xls
+*.xlsx
