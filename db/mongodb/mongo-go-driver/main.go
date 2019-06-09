@@ -1,11 +1,9 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"golang-study/db/mongodb/mongo-go-driver/model"
 	"log"
 	"time"
 )
@@ -17,19 +15,16 @@ import (
 //}
 
 func main() {
-	fmt.Println("连接mongodb")
-	mongoose := "mongodb://127.0.0.1:27017"
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	accuse_log := model.TingoDb.Collection("accuse_log")
+	user := model.TingoDb.Collection("user")
+	ctx := model.Ctx
 
-	defer cancel()
-	client, err := mongo.Connect(ctx,options.Client().ApplyURI(mongoose))
-	if err != nil {
-		log.Fatal(err)
-	}
-	db := client.Database("tingodb")
-	accuse_log := db.Collection("accuse_log")
-
-	list, err := accuse_log.Find(ctx, bson.M{"type":"golang"})
+	userData := user.FindOne(ctx, bson.M{"usertoken": "349639"})
+	fmt.Println(userData.DecodeBytes())
+	userMap := bson.M{}
+	userData.Decode(&userMap)
+	fmt.Println("----------",userMap["nickname"])//通过map进行获取字段
+	list, err := accuse_log.Find(ctx, bson.M{"type": "golang"})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,9 +44,9 @@ func main() {
 	//时间戳：为int32
 	timestamp := cur.UnixNano() / (1000000 * 1000)
 	fmt.Println(int32(timestamp))
-	accuse_log.InsertOne(ctx,bson.M{
-		"content":"禅师与青年","type":"golang","usertoken":"349639",
-		"title":"mongo-go-driver","status":0,"created":int32(timestamp),
-	})
+	//accuse_log.InsertOne(ctx, bson.M{
+	//	"content": "禅师与青年abcd", "type": "golang", "usertoken": "349639",
+	//	"title": "mongo-go-driver", "status": 0, "created": int32(timestamp),
+	//})
 
 }
