@@ -1,21 +1,30 @@
 package wait
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"strings"
 	"sync"
 )
 
 var wg sync.WaitGroup
 var urls = []string{
-	"http://www.golang.org/",
-	"http://www.google.com/",
+	"http://www.taobao.com/",
+	"http://www.baidu.org/",
 	"http://www.qq.com/",
+	"https://cnodejs.org/api/v1/topic_collect/yanxxit",
+}
+
+type CnodeStruct struct {
+	Success string `json:"success"`
+	Error_msg string `json:"error_msg"`
 }
 
 /**
 aaaaa
- */
+*/
 func GetMore() {
 	for _, url := range urls {
 		//每个url启动一个goruntine，同时给wg加1
@@ -28,7 +37,18 @@ func GetMore() {
 			//发送HTTP get请求并打印HTTP返回码
 			resp, err := http.Get(url)
 			if err == nil {
-				fmt.Println(resp.Status)
+				fmt.Println("--->>>>", url, resp.Status)
+				//程序在使用完回复后必须关闭回复的主题
+				defer resp.Body.Close()
+				if strings.Contains(url, "cnode") {
+					var cnode CnodeStruct
+					body, _ := ioutil.ReadAll(resp.Body)
+					json.Unmarshal(body,cnode)
+					fmt.Println("校验：", url, string(body))
+					fmt.Println("----L>>",cnode.Error_msg)
+					fmt.Println("----L>>",cnode.Success)
+					fmt.Println("----L>>",cnode)
+				}
 			}
 		}(url)
 	}
