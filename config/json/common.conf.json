@@ -1,5 +1,4 @@
 {
-  "enabled": true,
-  "path": "/usr/local",
-  "language": "golang"
+  "port": 10086,
+  "host": "127.0.0.1"
 }

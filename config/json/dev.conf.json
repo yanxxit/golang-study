@@ -1,4 +1,7 @@
 {
   "enabled": true,
-  "path": "/usr/local"
+  "path": "/usr/local",
+  "name":"golang-study",
+  "title":"hello world",
+  "host":"localhost"
 }
