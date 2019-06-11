@@ -60,10 +60,21 @@ type Lion struct {
 	About string
 }
 
+type Cat struct {
+	Animal
+}
+
 func Golion() {
 	var lion = Lion{
 		Animal: Animal{Name: "小狮子", Color: "灰色"}, About: "aaaa",
 	}
+	var cat = Cat{
+		Animal{Name: "kitty", Color: "黑色"},
+	}
+	//匿名:猫
+	cat.Eat()
+	cat.Run()
+	//非匿名：狮子
 	lion.Animal.Run()
 	fmt.Println(lion.About)
 }
