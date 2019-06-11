@@ -24,30 +24,29 @@ strconv.Atoi(s string) (i int, err error)
 ### 将字符串转换为 float64 型
 strconv.ParseFloat(s string, bitSize int) (f float64, err error)
 
-
 // atob.go
         ------------------------------------------------------------
-        // ParseBool 将字符串转换为布尔值
-        // 它接受真值：1, t, T, TRUE, true, True
-        // 它接受假值：0, f, F, FALSE, false, False.
-        // 其它任何值都返回一个错误
-        func ParseBool(str string) (value bool, err error)
-        func main() {
-	fmt.Println(strconv.ParseBool("1"))    // true
-	fmt.Println(strconv.ParseBool("t"))    // true
-	fmt.Println(strconv.ParseBool("T"))    // true
-	fmt.Println(strconv.ParseBool("true")) // true
-	fmt.Println(strconv.ParseBool("True")) // true
-	fmt.Println(strconv.ParseBool("TRUE")) // true
-	fmt.Println(strconv.ParseBool("TRue"))	// false strconv.ParseBool: parsing "TRue": invalid syntax
-	fmt.Println(strconv.ParseBool("0"))     // false
-	fmt.Println(strconv.ParseBool("f"))     // false
-	fmt.Println(strconv.ParseBool("F"))     // false
-	fmt.Println(strconv.ParseBool("false")) // false
-	fmt.Println(strconv.ParseBool("False")) // false
-	fmt.Println(strconv.ParseBool("FALSE")) // false
-	fmt.Println(strconv.ParseBool("FALse"))	// false strconv.ParseBool: parsing "FAlse": invalid syntax
-	}
+​        // ParseBool 将字符串转换为布尔值
+​        // 它接受真值：1, t, T, TRUE, true, True
+​        // 它接受假值：0, f, F, FALSE, false, False.
+​        // 其它任何值都返回一个错误
+​        func ParseBool(str string) (value bool, err error)
+​        func main() {
+​	fmt.Println(strconv.ParseBool("1"))    // true
+​	fmt.Println(strconv.ParseBool("t"))    // true
+​	fmt.Println(strconv.ParseBool("T"))    // true
+​	fmt.Println(strconv.ParseBool("true")) // true
+​	fmt.Println(strconv.ParseBool("True")) // true
+​	fmt.Println(strconv.ParseBool("TRUE")) // true
+​	fmt.Println(strconv.ParseBool("TRue"))	// false strconv.ParseBool: parsing "TRue": invalid syntax
+​	fmt.Println(strconv.ParseBool("0"))     // false
+​	fmt.Println(strconv.ParseBool("f"))     // false
+​	fmt.Println(strconv.ParseBool("F"))     // false
+​	fmt.Println(strconv.ParseBool("false")) // false
+​	fmt.Println(strconv.ParseBool("False")) // false
+​	fmt.Println(strconv.ParseBool("FALSE")) // false
+​	fmt.Println(strconv.ParseBool("FALse"))	// false strconv.ParseBool: parsing "FAlse": invalid syntax
+​	}
 
 ------------------------------------------------------------
 // FormatBool 将布尔值转换为字符串 "true" 或 "false"
@@ -81,6 +80,8 @@ func main() {
 // 则返回浮点数的四舍五入值（依据 IEEE754 的四舍五入标准）
 // 如果 s 不是合法的格式，则返回“语法错误”
 // 如果转换结果超出 bitSize 范围，则返回“超出范围”
+
+```
 func ParseFloat(s string, bitSize int) (f float64, err error)
 func main() {
 	s := "0.12345678901234567890"
@@ -90,6 +91,7 @@ func main() {
 	f, err = strconv.ParseFloat(s, 64)
 	fmt.Println(f, err)                // 0.12345678901234568
 	}
+```
 
 
 

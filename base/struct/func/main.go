@@ -1,5 +1,10 @@
 package main
 
+/**
+1. 组合
+2. 方法
+*/
+
 import "fmt"
 
 type User struct {
@@ -21,12 +26,26 @@ func (u *User) GetNickName(openid string) string {
 	return openid + "的博客"
 }
 
+/**
+获取用户爱好
+绑定到Member结构体的方法
+*/
+func (u *User) GetUserLove(love string) string {
+	if u.Love == "" {
+		u.Love = love //设置后，值传递
+	}
+	return u.Name + "喜欢" + u.Love
+}
+
 func main() {
 	my := &User{Name: "admin", Pwd: "123123", Mobile: "17721021494", Email: "123@qq.com", Openid: "abcdefg"}
 	name := my.GetName()
 	openid := my.GetNickName("openid...")
+	love := my.GetUserLove("golang")
+	fmt.Println("----->", love)
 	fmt.Println(name)
 	fmt.Println(openid)
+	fmt.Println("===========>", my.Love)
 	testDerive()
 }
 
