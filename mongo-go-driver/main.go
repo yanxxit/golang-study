@@ -23,7 +23,11 @@ func main() {
 	fmt.Println(userData.DecodeBytes())
 	userMap := bson.M{}
 	userData.Decode(&userMap)
-	fmt.Println("----------",userMap["nickname"])//通过map进行获取字段
+
+	fmt.Println("----------", userMap["nickname"])    //通过map进行获取字段
+	fmt.Println("----------", userMap["phonenumber"]) //通过map进行获取字段
+	fmt.Println("----------", userMap["_id"])         //通过map进行获取字段
+
 	list, err := accuse_log.Find(ctx, bson.M{"type": "golang"})
 	if err != nil {
 		log.Fatal(err)
