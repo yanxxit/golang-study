@@ -12,13 +12,14 @@ import (
 var TingoDb *mongo.Database
 var Ctx context.Context
 
-func init()  {
+func init() {
 	fmt.Println("初始化后")
-	mongoose := "mongodb://127.0.0.1:27017/tingodb"
+	// mongoose := "mongodb://127.0.0.1:27017/tingodb"
+	mongoose := "mongodb://tingo.w:w#tingo@172.16.1.102:27017/tingodb"
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	defer cancel()
-	client, err := mongo.Connect(ctx,options.Client().ApplyURI(mongoose))
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoose))
 	if err != nil {
 		log.Fatal(err)
 	}
