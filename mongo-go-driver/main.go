@@ -10,11 +10,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-//type AccuseLog struct {
-//	ID    objectid.ObjectID "_id,omitempty"
-//	Name  string	`bson:"dbname",json:"jsonname"`
-//	Phone string
-//}
+type AccuseLog struct {
+	ID        primitive.ObjectID "_id"
+	Title     string             `bson:"title",json:"title"`
+	Usertoken string
+}
 
 func main() {
 	// 选择一个集合
@@ -30,6 +30,9 @@ func main() {
 	fmt.Println(id, id.Hex())
 	// 通过ObjectId 获取数据
 	userData2 := accuse_log.FindOne(ctx, bson.M{"_id": id})
+	// var body AccuseLog
+	// aaa, _ = userData2.DecodeBytes()
+	// json.Unmarshal(aaa, &body)
 
 	// fmt.Println(userData.DecodeBytes())
 	fmt.Println(userData2.DecodeBytes())
