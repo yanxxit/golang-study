@@ -3,10 +3,12 @@ package model
 import (
 	"context"
 	"fmt"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 var TingoDb *mongo.Database
@@ -19,9 +21,15 @@ func init() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	defer cancel()
+	// 链接mongo服务
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoose))
 	if err != nil {
 		log.Fatal(err)
 	}
+	// 判断服务是否可用
+	if err = client.Ping(ctx, readpref.Primary()); err != nil {
+		log.Fatal(err)
+	}
+	// 选择数据库
 	TingoDb = client.Database("tingodb")
 }

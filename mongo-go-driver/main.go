@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"golang-study/mongo-go-driver/model"
+	"time"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"golang-study/mongo-go-driver/model"
-	"log"
-	"time"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 //type AccuseLog struct {
@@ -16,6 +17,7 @@ import (
 //}
 
 func main() {
+	// 选择一个集合
 	accuse_log := model.TingoDb.Collection("accuse_log")
 	user := model.TingoDb.Collection("user")
 	ctx := model.Ctx
@@ -64,33 +66,23 @@ func main() {
 	}
 
 	// 查询列表数据
-	list, err := accuse_log.Find(ctx, bson.M{"type": "golang"})
-	list2, _ := accuse_log.Find(ctx, bson.M{"type": "golang", "content": primitive.Regex{Pattern: "abcd"}})
-	if err != nil {
-		log.Fatal(err)
-	}
+	list, _ := accuse_log.Find(ctx, bson.M{"type": "golang", "content": primitive.Regex{Pattern: "abcd"}})
+	count, _ := accuse_log.CountDocuments(ctx, bson.M{"type": "golang", "content": primitive.Regex{Pattern: "abcd"}})
+	list1, _ := accuse_log.Find(ctx, bson.M{"type": "golang"}, options.Find().SetLimit(2), options.Find().SetSort(bson.M{"created": -1}))
 
+	fmt.Println("count:====>>>:", count)
+	fmt.Printf("Count里面有多少条数据:%d\n", count)
 	for list.Next(ctx) {
-		//返回的是map 数据
-		var result bson.M
-		err := list.Decode(&result)
-		if err != nil {
-			log.Fatal(err)
-		}
+		var result bson.M //返回的是map 数据
+		list.Decode(&result)
 		fmt.Println("---->", result["content"])
 	}
-	for list2.Next(ctx) {
-		//返回的是map 数据
+	for list1.Next(ctx) {
 		var result bson.M
-		err := list2.Decode(&result)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println("2---->", result["content"])
+		list1.Decode(&result)
+		fmt.Println("排序：---->", result["content"])
 	}
-	if err := list.Err(); err != nil {
-		log.Fatal(err)
-	}
+
 	cur := time.Now()
 	//时间戳：为int32
 	timestamp := cur.UnixNano() / (1000000 * 1000)
