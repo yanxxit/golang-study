@@ -11,6 +11,7 @@ import (
 
 func main() {
 	fmt.Println("时间控件的使用")
+	fmt.Println("Demo all!")
 	tody := time.Now().Weekday()
 	fmt.Println(tody)
 	fmt.Println("tody", time.Now())
