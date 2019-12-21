@@ -1,21 +1,43 @@
 package main
 
 import (
+	"context"
+	"encoding/json"
+	"errors"
 	"fmt"
-	"golang-study/mongo-go-driver/model"
-	"time"
-
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"golang-study/mongo-go-driver/model"
+	"time"
 )
 
 type AccuseLog struct {
 	ID        primitive.ObjectID "_id"
 	Title     string             `bson:"title",json:"title"`
 	Usertoken string
+	Type      string
+	Content   string
+	Status    int8
+	Create    int64
 }
 
+func TransInterfaceToMapOne(data interface{}) (body map[string]interface{}, err error) {
+	mybyte, err := TransInterfaceToByte(data)
+	err = json.Unmarshal(mybyte, &body)
+	return body, err
+}
+
+func TransInterfaceToByte(data interface{}) (mybyte []byte, err error) {
+	switch v := data.(type) {
+	case string:
+		return []byte(v), nil
+	case []byte:
+		return v, nil
+	default:
+		return nil, errors.New("非string或者[]byte")
+	}
+}
 func main() {
 	// 选择一个集合
 	accuse_log := model.TingoDb.Collection("accuse_log")
@@ -30,11 +52,18 @@ func main() {
 	fmt.Println(id, id.Hex())
 	// 通过ObjectId 获取数据
 	userData2 := accuse_log.FindOne(ctx, bson.M{"_id": id})
-	// var body AccuseLog
-	// aaa, _ = userData2.DecodeBytes()
-	// json.Unmarshal(aaa, &body)
+	// 查询并返回结构体 .Decode 转换
+	var body AccuseLog
+	//var accuseLogs []*AccuseLog
+	_ = accuse_log.FindOne(ctx, bson.M{"_id": id}).Decode(&body)
+	//_ = accuse_log.Find(ctx, bson.M{"usertoken": "349639"}).Decode(&accuseLogs)
+	cur1, _ := accuse_log.Find(context.Background(), bson.M{"usertoken": "349639"})
+	fmt.Println("curl:=>", cur1)
+	cur1.Close(context.Background())
+	//cur.All
+	fmt.Println("accuse_log:title=", body.Title)
+	fmt.Println("accuse_log:body=", body)
 
-	// fmt.Println(userData.DecodeBytes())
 	fmt.Println(userData2.DecodeBytes())
 	userMap := bson.M{}
 	userMap1 := bson.M{}
@@ -81,9 +110,9 @@ func main() {
 		fmt.Println("---->", result["content"])
 	}
 	for list1.Next(ctx) {
-		var result bson.M
+		var result AccuseLog
 		list1.Decode(&result)
-		fmt.Println("排序：---->", result["content"])
+		fmt.Println("struct 数据整理------->>", result.Content)
 	}
 
 	cur := time.Now()
