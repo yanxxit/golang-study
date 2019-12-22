@@ -14,6 +14,7 @@ require (
 	github.com/Bowery/prompt v0.0.0-20190419144237-972d0ceb96f5 // indirect
 	github.com/Unknwon/com v0.0.0-20190321035513-0fed4efef755 // indirect
 	github.com/Unknwon/goconfig v0.0.0-20190425194916-3dba17dd7b9e // indirect
+	github.com/akkuman/parseConfig v0.0.0-20180726145144-e82ba4776ec3 // indirect
 	github.com/astaxie/beego v1.12.0
 	github.com/codegangsta/cli v1.20.0 // indirect
 	github.com/dchest/safefile v0.0.0-20151022103144-855e8d98f185 // indirect
@@ -24,7 +25,7 @@ require (
 	github.com/google/go-cmp v0.3.1 // indirect
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
 	github.com/gpmgo/gopm v0.6.5 // indirect
-	github.com/json-iterator/go v1.1.8 // indirect
+	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/kardianos/govendor v1.0.9 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.11 // indirect
@@ -33,6 +34,7 @@ require (
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/robfig/cron v1.2.0
 	github.com/shawflying/beego-common-utils v0.0.0-20171212074811-817488a2ce58 // indirect
+	github.com/tealeg/xlsx v1.0.5
 	github.com/tidwall/pretty v1.0.0 // indirect
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
 	github.com/xdg/stringprep v1.0.0 // indirect

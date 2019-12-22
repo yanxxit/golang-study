@@ -1,0 +1,8 @@
+{
+  "name" : "akkuman",
+  "urls" : ["xx.com","ww.com"],
+  "info" : {
+    "qq" : "123456",
+    "weixin": "123456"
+  }
+}
