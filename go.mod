@@ -27,6 +27,8 @@ require (
 	github.com/gpmgo/gopm v0.6.5 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/kardianos/govendor v1.0.9 // indirect
+	github.com/klauspost/compress v1.9.4 // indirect
+	github.com/klauspost/cpuid v1.2.2 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.11 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -36,10 +38,10 @@ require (
 	github.com/shawflying/beego-common-utils v0.0.0-20171212074811-817488a2ce58 // indirect
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tidwall/pretty v1.0.0 // indirect
+	github.com/valyala/fasthttp v1.7.0 // indirect
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
 	github.com/xdg/stringprep v1.0.0 // indirect
 	go.mongodb.org/mongo-driver v1.0.3
-	golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c // indirect
 	golang.org/x/sync v0.0.0-00010101000000-000000000000 // indirect
 	golang.org/x/sys v0.0.0-20191210023423-ac6580df4449 // indirect
 	gopkg.in/gin-gonic/gin.v1 v1.3.0 // indirect
