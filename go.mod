@@ -38,7 +38,7 @@ require (
 	github.com/shawflying/beego-common-utils v0.0.0-20171212074811-817488a2ce58 // indirect
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tidwall/pretty v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.7.0 // indirect
+	github.com/valyala/fasthttp v1.7.0
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
 	github.com/xdg/stringprep v1.0.0 // indirect
 	go.mongodb.org/mongo-driver v1.0.3
