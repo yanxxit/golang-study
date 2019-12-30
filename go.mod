@@ -35,7 +35,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/robfig/cron v1.2.0
-	github.com/shawflying/beego-common-utils v0.0.0-20171212074811-817488a2ce58 // indirect
+	github.com/shawflying/beego-common-utils v0.0.0-20171212074811-817488a2ce58
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tidwall/pretty v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.7.0
@@ -44,7 +44,7 @@ require (
 	go.mongodb.org/mongo-driver v1.0.3
 	golang.org/x/sync v0.0.0-00010101000000-000000000000 // indirect
 	golang.org/x/sys v0.0.0-20191210023423-ac6580df4449 // indirect
-	gopkg.in/gin-gonic/gin.v1 v1.3.0 // indirect
+	gopkg.in/gin-gonic/gin.v1 v1.3.0
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 	gopkg.in/go-playground/validator.v9 v9.30.2 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
