@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 )
+
 // https://www.jianshu.com/p/98965b3ff638/
 func main() {
 	r := gin.Default()
@@ -16,13 +17,18 @@ func main() {
 	// 使用 Recovery 中间件
 	r.Use(gin.Recovery())
 
-	f,_:=os.Create("gin.log")
+	f, _ := os.Create("gin.log")
 	gin.DefaultWriter = io.MultiWriter(f)
 
 	v1 := r.Group("/v1")
 	{
-		// http://127.0.0.1:8083/v1/login
-		v1.GET("/login", controller.Ping)
+		// curl -X POST -d '{admin:"node.js"}' http://127.0.0.1:8083/v1/login
+		// curl --location --request POST 'http://127.0.0.1:8083/v1/login' \
+		//--header 'Content-Type: application/json' \
+		//--data-raw '{
+		//    "admin": "123123"
+		//}'
+		v1.POST("/login", controller.Login)
 	}
 
 	r.GET("/ping", controller.Ping)
