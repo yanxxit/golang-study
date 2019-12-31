@@ -3,66 +3,47 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"golang-study/gin/controller"
+	"io"
+	"os"
 )
-
+// https://www.jianshu.com/p/98965b3ff638/
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+
+	// 使用Logger中间件
+	r.Use(gin.Logger())
+	// 使用 Recovery 中间件
+	r.Use(gin.Recovery())
+
+	f,_:=os.Create("gin.log")
+	gin.DefaultWriter = io.MultiWriter(f)
+
+	v1 := r.Group("/v1")
+	{
+		// http://127.0.0.1:8083/v1/login
+		v1.GET("/login", controller.Ping)
+	}
+
+	r.GET("/ping", controller.Ping)
 
 	// about get
-	r.GET("/about", func(c *gin.Context) {
-		admin := c.Query("admin")
-		fmt.Println("admin:", admin)
-		test := c.Query("test")
-
-		if test == "" {
-			test = "admin"
-		}
-		c.JSON(http.StatusOK, gin.H{"result": 1, "error": "success", "data": gin.H{"admin": admin, "test": test}})
-	})
+	r.GET("/about", controller.About)
 
 	// http://127.0.0.1:8082/list?list=[11,22,33]
-	r.GET("/list", func(c *gin.Context) {
-		list := c.QueryArray("list")
-		list2 := c.Query("list")
-		fmt.Println(list[0][0])
-		fmt.Println(list2)
-		for _, v := range list {
-			fmt.Println(v)
-		}
-		c.JSON(http.StatusOK, gin.H{"list": list})
-	})
+	r.GET("/list", controller.List)
 
-	// 获取id
-	// http://127.0.0.1:8082/user/349639/admin?info=aaaaa
-	r.GET("/user/:id/:name", func(c *gin.Context) {
-		id := c.Param("id")
-		name := c.Param("name")
-		info := c.DefaultQuery("info", "hello world")
-		hello := c.DefaultQuery("hello", "hello world")
-		fmt.Println("get default info:", info)
-		if info == "" {
-			info = "hello!"
-		}
-		c.JSON(http.StatusOK, gin.H{"result": 1, "error": info, "data": gin.H{"id": id, "name": name, "hello": hello}})
-	})
+	// http://127.0.0.1:8083/user/349639/admin?info=aaaaa
+	r.GET("/user/:id/:name", controller.GetUserName)
 
-	// curl -X POST -d 'admin=yanxxit'  http://127.0.0.1:8082/user/create
-	r.POST("/user/create", func(c *gin.Context) {
-		admin := c.PostForm("admin")
-		c.JSON(http.StatusOK, gin.H{"result": 1, "data": admin})
-	})
-	r.POST("/user/add", func(c *gin.Context) {
-		c.Header("Content-Type", "application/x-www-form-urlencoded")
-		admin := c.PostForm("admin")
-		c.JSON(http.StatusOK, gin.H{"result": 1, "data": admin})
-	})
+	// curl -X POST -d 'admin=yanxxit' http://127.0.0.1:8083/user/create
+	r.POST("/user/create", controller.UserCreate)
+	r.POST("/user/add", controller.UserAdd)
+
+	// http://127.0.0.1:8083/home/info
+	r.GET("/home/info", controller.IndexApi)
 
 	// r.Run("http://127.0.0.1:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	fmt.Println("http://127.0.0.1:8083")
 	r.Run(":8083") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
