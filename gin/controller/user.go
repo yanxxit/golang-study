@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin/binding"
 	"log"
 	"net/http"
+	"time"
 )
 
 func IndexApi(c *gin.Context) {
@@ -13,8 +14,18 @@ func IndexApi(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"result": 1, "data": "indexapi"})
 }
 
+// 如果没有注册就使用MustGet方法读取c的值将会抛错，可以使用Get方法取而代之。
 func Ping(c *gin.Context) {
-	c.JSON(200, gin.H{"message": "pong"})
+	// 获取中间件中的request
+	req1 := c.MustGet("request").(string)
+	req, _ := c.Get("request")
+	fmt.Println("auth:", req1, req)
+	c.JSON(200, gin.H{"message": "pong", "request": req})
+}
+
+/** 跳转到baidu :重定向 */
+func RedirectBaidu(c *gin.Context) {
+	c.Redirect(http.StatusMovedPermanently, "http://wwww.baidu.com")
 }
 
 func About(c *gin.Context) {
@@ -75,6 +86,9 @@ func LoginIn(c *gin.Context) {
 		err = c.BindWith(&user, binding.Form)
 
 	}
+	aa := c.Request.FormValue("admin")
+	bb := c.Request.PostFormValue("admin")
+	fmt.Println("====>", aa, "bb:", bb)
 	if err != nil {
 		fmt.Println(err)
 		log.Fatal(err)
@@ -90,4 +104,21 @@ func Login(c *gin.Context) {
 		log.Fatal(err)
 	}
 	c.JSON(http.StatusOK, gin.H{"result": 1, "error": "success", "data": user})
+}
+
+// 等待时间
+func Sleep(c *gin.Context) {
+	time.Sleep(5 * time.Second)
+	c.JSON(http.StatusOK, gin.H{"sleep": "5s"})
+}
+
+// 异步协程
+func Async(c *gin.Context) {
+	cCp := c.Copy()
+	// 在请求的时候，sleep5秒钟，同步的逻辑可以看到，服务的进程睡眠了。异步的逻辑则看到响应返回了，然后程序还在后台的协程处理。
+	go func() {
+		time.Sleep(5 * time.Second)
+		log.Println("Done! in path" + cCp.Request.URL.Path)
+	}()
+	c.JSON(http.StatusOK, gin.H{"async": "ok"})
 }

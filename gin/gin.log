@@ -1,0 +1,13 @@
+[GIN-debug] POST   /v1/login                 --> golang-study/gin/controller.Login (9 handlers)
+[GIN-debug] POST   /v1/loginIn               --> golang-study/gin/controller.LoginIn (9 handlers)
+[GIN-debug] GET    /ping                     --> golang-study/gin/controller.Ping (6 handlers)
+[GIN-debug] GET    /sleep                    --> golang-study/gin/controller.Sleep (6 handlers)
+[GIN-debug] GET    /async                    --> golang-study/gin/controller.Async (6 handlers)
+[GIN-debug] GET    /about                    --> golang-study/gin/controller.About (6 handlers)
+[GIN-debug] GET    /baidu                    --> golang-study/gin/controller.RedirectBaidu (6 handlers)
+[GIN-debug] GET    /list                     --> golang-study/gin/controller.List (6 handlers)
+[GIN-debug] GET    /user/:id/:name           --> golang-study/gin/controller.GetUserName (6 handlers)
+[GIN-debug] POST   /user/create              --> golang-study/gin/controller.UserCreate (6 handlers)
+[GIN-debug] POST   /user/add                 --> golang-study/gin/controller.UserAdd (6 handlers)
+[GIN-debug] GET    /home/info                --> golang-study/gin/controller.IndexApi (6 handlers)
+[GIN-debug] Listening and serving HTTP on :8083
