@@ -61,10 +61,15 @@ func main() {
 	{
 		// curl -X POST -d '{admin:"node.js"}' http://127.0.0.1:8083/v1/login
 		// curl --location --request POST 'http://127.0.0.1:8083/v1/login' --header 'Content-Type: application/json' --data-raw '{"admin": "123123"}'
-		// curl --location --request POST 'http://127.0.0.1:8083/v1/loginIn' --header 'Content-Type: application/json' --data-raw '{"admin": "123123"}'
+		// curl 'http://127.0.0.1:8083/v1/post'
 		// 单个路由中间件 middleware.Auth()
 		v1.POST("/login", middleware.Auth(), controller.Login)
 		v1.POST("/loginIn", middleware.Auth(), controller.LoginIn)
+		v1.GET("/post", middleware.Auth(), controller.PostHttp)
+		// curl http://127.0.0.1:8083/v1/user/349639
+		v1.GET("/user/:userid", middleware.Auth(), controller.GetUserByUserId)
+		// curl http://127.0.0.1:8083/v1/users
+		v1.GET("/users", middleware.Auth(), controller.GetUserList)
 	}
 
 	tpl := r.Group("/tpl")

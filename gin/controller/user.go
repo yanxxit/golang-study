@@ -1,11 +1,18 @@
 package controller
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+	"github.com/valyala/fasthttp"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"golang-study/gin/model"
+	"golang-study/gin/service"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -55,6 +62,44 @@ func UserCreate(c *gin.Context) {
 	admin := c.PostForm("admin")
 	version := c.DefaultPostForm("version", "v1.0.1") // 此方法可以设置默认值
 	c.JSON(http.StatusOK, gin.H{"result": 1, "data": admin, "version": version})
+}
+
+// 获取User信息
+func GetUserByUserId(c *gin.Context) {
+	userid := c.Param("userid")
+	fmt.Println(userid)
+	id, _ := strconv.Atoi(userid)
+	user := model.TingoDb.Collection("user")
+	ctx := model.Ctx
+	var body map[string]interface{}
+	user.FindOne(ctx, bson.M{"userid": id}).Decode(&body)
+
+	c.JSON(http.StatusOK, gin.H{"result": 1, "data": body, "error": "success"})
+}
+
+// 查询Users 用户列表
+func GetUserList(c *gin.Context) {
+	accuse_log := model.TingoDb.Collection("accuse_log")
+	ctx := model.Ctx
+
+	version := service.GetVersion("admin")
+	fmt.Println("version:", version)
+
+	list, _ := accuse_log.Find(ctx, bson.M{"type": "golang"}, options.Find().SetLimit(2), options.Find().SetSort(bson.M{"created": -1}))
+	var logs []map[string]interface{}
+	for list.Next(ctx) {
+		var result map[string]interface{}
+
+		list.Decode(&result)
+		fmt.Println(result)
+		logs = append(logs, result)
+	}
+
+	for _, v := range logs {
+		fmt.Println("=====>>>>>>", v, "type:", v["type"])
+	}
+
+	c.JSON(http.StatusOK, gin.H{"result": 1, "data": logs, "error": "success"})
 }
 
 func UserAdd(c *gin.Context) {
@@ -113,6 +158,31 @@ func Sleep(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"sleep": "5s"})
 }
 
+func PostHttp(c *gin.Context) {
+	url := `http://httpbin.org/post?key=123`
+
+	// 填充表单，类似于net/url
+	args := &fasthttp.Args{}
+	args.Add("name", "test")
+	args.Add("age", "18")
+
+	status, resp, err := fasthttp.Post(nil, url, args)
+	if err != nil {
+		fmt.Println("请求失败:", err.Error())
+		return
+	}
+
+	if status != fasthttp.StatusOK {
+		fmt.Println("请求没有成功:", status)
+		return
+	}
+
+	fmt.Println(string(resp))
+	var data map[string]interface{}
+	json.Unmarshal([]byte(resp), &data)
+	c.JSON(http.StatusOK, gin.H{"data": data})
+}
+
 // 异步协程
 func Async(c *gin.Context) {
 	cCp := c.Copy()
@@ -128,6 +198,7 @@ type student struct {
 	Name string
 	Age  int8
 }
+
 //HTML 渲染
 //使用 LoadHTMLGlob () 或 LoadHTMLFiles ()
 func HomeAbout(c *gin.Context) {

@@ -26,7 +26,7 @@ require (
 	github.com/gpmgo/gopm v0.6.5 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/kardianos/govendor v1.0.9 // indirect
-	github.com/klauspost/compress v1.9.4 // indirect
+	github.com/klauspost/compress v1.9.5 // indirect
 	github.com/klauspost/cpuid v1.2.2 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.11 // indirect
@@ -43,7 +43,7 @@ require (
 	github.com/spf13/viper v1.6.1
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tidwall/pretty v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.7.0
+	github.com/valyala/fasthttp v1.7.1
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
 	github.com/xdg/stringprep v1.0.0 // indirect
 	go.mongodb.org/mongo-driver v1.0.3
