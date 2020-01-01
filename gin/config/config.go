@@ -10,7 +10,7 @@ import (
 //profile variables
 type Yaml struct {
 	Env     string `yaml:"env"`
-	Port    int16  `yaml:"port"`
+	Port    int  `yaml:"port"`
 	Mongodb string `yaml:"mongodb"`
 }
 

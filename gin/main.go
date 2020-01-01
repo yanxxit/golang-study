@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"golang-study/gin/config"
 	"golang-study/gin/controller"
 	"golang-study/gin/middleware"
+	"strconv"
 
 	"io"
 	"net/http"
@@ -101,6 +103,6 @@ func main() {
 	r.GET("/home/info", controller.IndexApi)
 
 	// r.Run("http://127.0.0.1:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-	fmt.Println("http://127.0.0.1:8083")
-	r.Run(":8083") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	fmt.Println("http://127.0.0.1:8083  " + config.Conf.Env)
+	r.Run(":" + strconv.Itoa(config.Conf.Port)) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
