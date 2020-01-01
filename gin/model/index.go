@@ -3,6 +3,7 @@ package model
 import (
 	"context"
 	"fmt"
+	"golang-study/gin/config"
 	"log"
 	"time"
 
@@ -17,7 +18,9 @@ var Ctx context.Context
 func init() {
 	fmt.Println("初始化后")
 	// mongoose := "mongodb://127.0.0.1:27017/tingodb"
-	mongoose := "mongodb://tingo.w:w#tingo@172.16.1.102:27017/tingodb"
+	mongoose := config.Conf.Mongodb
+	//mongoose := "mongodb://tingo.w:w#tingo@172.16.1.102:27017/tingodb"
+	fmt.Println(mongoose)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	defer cancel()

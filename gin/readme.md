@@ -24,7 +24,9 @@ go get github.com/gin-gonic/gin
 ## 日志
 
 ## 配置
-
+```go
+go get gopkg.in/yaml.v2
+```
 ## mongodb
 
 ## redis

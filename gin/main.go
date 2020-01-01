@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang-study/gin/controller"
 	"golang-study/gin/middleware"
+
 	"io"
 	"net/http"
 	"os"
@@ -13,18 +14,20 @@ import (
 
 // https://www.jianshu.com/p/98965b3ff638/
 func main() {
+
 	r := gin.Default()
 
 	// 禁用控制台颜色，当你将日志写入到文件的时候，你不需要控制台颜色。
 	//gin.DisableConsoleColor()
 	// 保持开启日志彩色显示:
 	gin.ForceConsoleColor()
-	// Logger 中间件将写日志到 gin.DefaultWriter ,即使你设置 GIN_MODE=release 。
-	// 默认 gin.DefaultWriter = os.Stdout
-	r.Use(gin.Logger())
+
 	//  Recovery 中间件从任何 panic 恢复，如果出现 panic，它会写一个 500 错误。
 	r.Use(gin.Recovery())
 
+	// Logger 中间件将写日志到 gin.DefaultWriter ,即使你设置 GIN_MODE=release 。
+	// 默认 gin.DefaultWriter = os.Stdout
+	//r.Use(gin.Logger())
 	// 自定义日志格式
 	r.Use(gin.LoggerWithFormatter(func(params gin.LogFormatterParams) string {
 		return fmt.Sprintf("%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
