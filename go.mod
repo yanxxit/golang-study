@@ -35,6 +35,7 @@ require (
 	github.com/pelletier/go-toml v1.6.0 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/robfig/cron v1.2.0
+	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/shawflying/beego-common-utils v0.0.0-20171212074811-817488a2ce58
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect

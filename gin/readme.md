@@ -29,8 +29,14 @@ go get github.com/sirupsen/logrus
 ```go
 go get gopkg.in/yaml.v2
 ```
-github.com/google/uuid
-github.com/robfig/cron
+
+## 工具
+```go
+go get github.com/satori/go.uuid
+go get github.com/google/uuid
+go get github.com/robfig/cron
+```
+
 ## mongodb
 ```go
 go get go.mongodb.org/mongo-driver/mongo
