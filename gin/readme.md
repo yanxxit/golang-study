@@ -22,15 +22,23 @@ go get github.com/gin-gonic/gin
 - [golang 文档](https://www.kancloud.cn/uvohp5na133/golang/934170)
 
 ## 日志
-
+```go
+go get github.com/sirupsen/logrus
+```
 ## 配置
 ```go
 go get gopkg.in/yaml.v2
 ```
+github.com/google/uuid
+github.com/robfig/cron
 ## mongodb
-
+```go
+go get go.mongodb.org/mongo-driver/mongo
+```
 ## redis
-
+```go
+go get github.com/go-redis/redis
+```
 ## http
 ```go
 go get -u github.com/valyala/fasthttp
