@@ -25,6 +25,7 @@ func Ping(c *gin.Context) {
 
 /** 跳转到baidu :重定向 */
 func RedirectBaidu(c *gin.Context) {
+	// 支持内部和外部的重定向
 	c.Redirect(http.StatusMovedPermanently, "http://wwww.baidu.com")
 }
 
@@ -84,7 +85,6 @@ func LoginIn(c *gin.Context) {
 		err = c.BindJSON(&user)
 	case "application/x-www-form-urlencoded":
 		err = c.BindWith(&user, binding.Form)
-
 	}
 	aa := c.Request.FormValue("admin")
 	bb := c.Request.PostFormValue("admin")
@@ -93,6 +93,7 @@ func LoginIn(c *gin.Context) {
 		fmt.Println(err)
 		log.Fatal(err)
 	}
+	log.Println("done! in path" + c.Request.URL.Path)
 	c.JSON(http.StatusOK, gin.H{"result": 1, "error": "success", "data": user})
 }
 
@@ -121,4 +122,19 @@ func Async(c *gin.Context) {
 		log.Println("Done! in path" + cCp.Request.URL.Path)
 	}()
 	c.JSON(http.StatusOK, gin.H{"async": "ok"})
+}
+
+type student struct {
+	Name string
+	Age  int8
+}
+//HTML 渲染
+//使用 LoadHTMLGlob () 或 LoadHTMLFiles ()
+func HomeAbout(c *gin.Context) {
+	stu1 := &student{Name: "node.js", Age: 18}
+	stu2 := &student{Name: "java", Age: 20}
+	c.HTML(http.StatusOK, "user.tmpl", gin.H{
+		"title":  "gin",
+		"stuArr": [2]*student{stu1, stu2},
+	})
 }

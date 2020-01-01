@@ -6,20 +6,51 @@ import (
 	"golang-study/gin/controller"
 	"golang-study/gin/middleware"
 	"io"
+	"net/http"
 	"os"
+	"time"
 )
 
 // https://www.jianshu.com/p/98965b3ff638/
 func main() {
 	r := gin.Default()
 
-	// 使用Logger中间件
+	// 禁用控制台颜色，当你将日志写入到文件的时候，你不需要控制台颜色。
+	//gin.DisableConsoleColor()
+	// 保持开启日志彩色显示:
+	gin.ForceConsoleColor()
+	// Logger 中间件将写日志到 gin.DefaultWriter ,即使你设置 GIN_MODE=release 。
+	// 默认 gin.DefaultWriter = os.Stdout
 	r.Use(gin.Logger())
-	// 使用 Recovery 中间件
+	//  Recovery 中间件从任何 panic 恢复，如果出现 panic，它会写一个 500 错误。
 	r.Use(gin.Recovery())
+
+	// 自定义日志格式
+	r.Use(gin.LoggerWithFormatter(func(params gin.LogFormatterParams) string {
+		return fmt.Sprintf("%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
+			params.ClientIP,
+			params.TimeStamp.Format(time.RFC1123),
+			params.Method,
+			params.Path,
+			params.Request.Proto,
+			params.StatusCode,
+			params.Latency,
+			params.Request.UserAgent(),
+			params.ErrorMessage, )
+	}))
 
 	// 中间件
 	r.Use(middleware.MiddleWare())
+
+	// HTML模板Template
+	r.LoadHTMLGlob("templates/*")
+
+	// 静态文件服务
+	// http://127.0.0.1:8083/html/
+	r.Static("/html", "./html")
+	// http://127.0.0.1:8083/static/
+	r.StaticFS("/static", http.Dir("html"))
+	r.StaticFile("/favicon.ico", "./html/favicon.ico")
 
 	f, _ := os.Create("gin.log")
 	gin.DefaultWriter = io.MultiWriter(f)
@@ -30,10 +61,15 @@ func main() {
 	{
 		// curl -X POST -d '{admin:"node.js"}' http://127.0.0.1:8083/v1/login
 		// curl --location --request POST 'http://127.0.0.1:8083/v1/login' --header 'Content-Type: application/json' --data-raw '{"admin": "123123"}'
+		// curl --location --request POST 'http://127.0.0.1:8083/v1/loginIn' --header 'Content-Type: application/json' --data-raw '{"admin": "123123"}'
 		// 单个路由中间件 middleware.Auth()
 		v1.POST("/login", middleware.Auth(), controller.Login)
 		v1.POST("/loginIn", middleware.Auth(), controller.LoginIn)
 	}
+
+	tpl := r.Group("/tpl")
+	// http://127.0.0.1:8083/tpl/user
+	tpl.GET("/user", controller.HomeAbout)
 
 	r.GET("/ping", controller.Ping)
 	r.GET("/sleep", controller.Sleep)
