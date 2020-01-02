@@ -33,6 +33,7 @@ go get gopkg.in/yaml.v2
 
 ## 工具
 ```go
+# 有demo
 go get github.com/satori/go.uuid
 go get github.com/google/uuid
 go get github.com/robfig/cron
