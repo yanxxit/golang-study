@@ -59,7 +59,6 @@ func main() {
 
 	f, _ := os.Create("gin.log")
 	gin.DefaultWriter = io.MultiWriter(f)
-
 	// 使用花括号包含被装饰的路由函数只是一个代码规范，即使没有被包含在内的路由函数，只要使用router进行路由，都等于被装饰了。想要区分权限范围，可以使用组返回的对象注册中间件。
 	v1 := r.Group("/v1", middleware.ApiV1())
 	v1.Use(middleware.ApiV12())

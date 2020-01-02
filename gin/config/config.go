@@ -29,7 +29,7 @@ func LoadConfig(dir string, env string) {
 	}
 }
 
-var dir = flag.String("config", "./", "input your config")
+var dir = flag.String("config", "./config", "input your config")
 var env = flag.String("env", "dev", "input your env")
 
 func init() {

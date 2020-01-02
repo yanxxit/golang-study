@@ -1,4 +1,5 @@
 # gin
+> golang的web api框架
 
 ## golang
 
@@ -48,4 +49,11 @@ go get github.com/go-redis/redis
 ## http
 ```go
 go get -u github.com/valyala/fasthttp
+```
+
+## 接口
+```go
+r.StaticFS("/static", http.Dir("html"))
+// 在公司的浏览器中可以显示ico
+r.StaticFile("/favicon.ico", "./html/favicon.ico")
 ```
