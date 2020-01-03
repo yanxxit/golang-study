@@ -46,6 +46,8 @@ go get go.mongodb.org/mongo-driver/mongo
 ## redis
 ```go
 go get github.com/go-redis/redis
+
+go get -u github.com/go-redis/redis
 ```
 ## http
 ```go
