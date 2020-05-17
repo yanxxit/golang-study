@@ -17,6 +17,7 @@ require (
 	github.com/Unknwon/goconfig v0.0.0-20190425194916-3dba17dd7b9e // indirect
 	github.com/akkuman/parseConfig v0.0.0-20180726145144-e82ba4776ec3 // indirect
 	github.com/astaxie/beego v1.12.0
+	github.com/boombuler/barcode v1.0.0 // indirect
 	github.com/codegangsta/cli v1.20.0 // indirect
 	github.com/dchest/safefile v0.0.0-20151022103144-855e8d98f185 // indirect
 	github.com/gin-gonic/gin v1.5.0
@@ -49,6 +50,7 @@ require (
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/shawflying/beego-common-utils v0.0.0-20171212074811-817488a2ce58
 	github.com/sirupsen/logrus v1.4.2 // indirect
+	github.com/skip2/go-qrcode v0.0.0-20191027152451-9434209cb086 // indirect
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
@@ -57,6 +59,7 @@ require (
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tidwall/pretty v1.0.0 // indirect
 	github.com/tpng/gopkgs v0.0.0-20180428091733-81e90e22e204 // indirect
+	github.com/tuotoo/qrcode v0.0.0-20190222102259-ac9c44189bf2 // indirect
 	github.com/valyala/fasthttp v1.7.1
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
 	github.com/xdg/stringprep v1.0.0 // indirect
