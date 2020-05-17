@@ -37,3 +37,8 @@ vcs.xml
 *.tar.gz
 
 *.log
+
+.history
+
+dev.yaml
+test.yaml

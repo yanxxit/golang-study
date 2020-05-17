@@ -1,0 +1,10 @@
+# default
+env: dev
+port: 8083
+host: 127.0.0.1
+user: admin
+
+email:
+    from_name: 果果
+    from: 123@qq.com
+    pwd: 123456
