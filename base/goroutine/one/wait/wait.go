@@ -18,7 +18,7 @@ var urls = []string{
 }
 
 type CnodeStruct struct {
-	Success string `json:"success"`
+	Success   string `json:"success"`
 	Error_msg string `json:"error_msg"`
 }
 
@@ -43,11 +43,11 @@ func GetMore() {
 				if strings.Contains(url, "cnode") {
 					var cnode CnodeStruct
 					body, _ := ioutil.ReadAll(resp.Body)
-					json.Unmarshal(body,cnode)
+					json.Unmarshal(body, cnode)
 					fmt.Println("校验：", url, string(body))
-					fmt.Println("----L>>",cnode.Error_msg)
-					fmt.Println("----L>>",cnode.Success)
-					fmt.Println("----L>>",cnode)
+					fmt.Println("----L>>", cnode.Error_msg)
+					fmt.Println("----L>>", cnode.Success)
+					fmt.Println("----L>>", cnode)
 				}
 			}
 		}(url)
