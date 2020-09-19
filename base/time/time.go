@@ -3,13 +3,27 @@ package main
 import (
 	"fmt"
 	"time"
+
 	//"math/rand"
 	//"strconv"
-	"strconv"
 	"math/rand"
+	"strconv"
 )
 
+// StartCac 计算golang运行的时间是非常有用的性能衡量指标，特别是在并发基准测试中。下面将介绍如何简单地使用Go语言来计算程序运行的时间。
+// StartCac 简单地使用Golang的time.Since()函数即可。下面有一个完整例子展示这个用法。
+func StartCac() {
+	t1 := time.Now() // get current time
+	//logic handlers
+	for i := 0; i < 1000; i++ {
+		fmt.Print("*")
+	}
+	elapsed := time.Since(t1)
+	fmt.Println("App elapsed: ", elapsed)
+}
+
 func main() {
+	StartCac()
 	fmt.Println("时间控件的使用")
 	fmt.Println("Demo all!")
 	tody := time.Now().Weekday()
